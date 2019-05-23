@@ -40,6 +40,22 @@ explore: individual {}
 
 explore: officer {}
 
-explore: product {}
+explore: product {
+  join: product_type {
+    type: inner
+    sql_on: ${product.product_type_cd} = ${product_type.product_type_cd} ;;
+    relationship: many_to_one
+  }
+  join: account {
+    type: inner
+    sql_on: ${product.product_cd} = ${account.product_cd} ;;
+    relationship: many_to_one
+  }
+  join: acc_transaction {
+    type: inner
+    sql_on: ${account.account_id} = ${acc_transaction.account_id} ;;
+    relationship: one_to_many
+  }
+}
 
 explore: product_type {}
